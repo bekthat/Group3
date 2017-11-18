@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <assert.h>
 using namespace std;
 
 class A {
@@ -94,8 +95,9 @@ void f5() {
 }
 
 class Integer {
-public:
+private:
 	int value;
+public:
 	//Integer(Integer&&) = default;
 	Integer() = default;
 	explicit Integer(int x) : value(x) {
@@ -109,10 +111,8 @@ public:
 		return *this;
 	}
 	//затирание
-	Integer operator +(const Integer& another) {
-		Integer x = Integer(another.value + this->value);
-		return x;
-	}
+	friend Integer operator +(const Integer& left, const Integer& right);
+	friend void test(Integer x);
 	//prefix
 	Integer operator ++() {
 		++this->value;
@@ -134,13 +134,26 @@ public:
 	operator int() {
 		return this->value;
 	}
+	int getValue() {
+		return value;
+	}
 	/*ostream& operator <<(ostream& stream) {
 		stream << this->value;
 		return stream;
 	}*/
 };
+
+Integer operator +(const Integer& left, const Integer& right) {
+	Integer x = Integer(left.value + right.value);
+	return x;
+}
+void test(Integer x) {
+	x.value = 5;
+	assert(x.getValue(), 5);
+}
+
 void f6() {
-	Integer x(5);
+	/*Integer x(5);
 	x = 10;
 	cout << x.value << endl;
 	Integer y(11);
@@ -151,7 +164,7 @@ void f6() {
 	z += y;
 	cout << z.value << endl;
 	Integer k = move(z);
-	Integer i();
+	Integer i();*/
 }
 class Progression {
 	int a1, d;
@@ -176,9 +189,11 @@ void f7() {
 	}
 }
 int main() {
-	Integer x(5);
+	Integer x(5), z(5);
+	Integer j = x + z;
 	int y = x;
 	cout << y << endl;
 	system("pause");
 	return 0;
 }
+//*, ; .
