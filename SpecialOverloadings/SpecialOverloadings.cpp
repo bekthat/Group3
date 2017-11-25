@@ -3,17 +3,14 @@
 
 #include "stdafx.h"
 using namespace std;
-
 istream& operator >> (istream& is, Integer& x) {
 	is >> x.value;
 	return is;
 }
-
 ostream& operator <<(ostream& os, const Integer& x) {
 	os << x.value;
 	return os;
 }
-
 Integer operator +(const Integer& x, const Integer& y) {
 	return Integer(x.value + y.value);
 }
@@ -39,23 +36,23 @@ void test(Unit x) {
 void print(Integer x) {
 	cout << x.value << endl;
 }
-
 class TestUnit {
 	void print(Unit u) {
 		cout << u.hp;
 	}
 };
-
 void f1() {
 	Integer x(5);
 	double s = (double)x;
 	system("pause");
 }
-
-int main() {
+void f2() {
 	Integer x(5);
 	cin >> x;
 	cout << x << endl;
+}
+
+int main() {
 	system("pause");
 	return 0;
 }
