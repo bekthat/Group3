@@ -35,6 +35,13 @@ public:
 	~String() {
 		delete s;
 	}
+	char operator [](int position) {
+		return s->at(position);
+	}
+	char operator ()(int x) {
+		//just copy of [] operator's overloading
+		return s->at(x);
+	}
 };
 
 class Vector {
@@ -61,39 +68,33 @@ public:
 		}
 	}
 };
-
 void f1() {
 	A a(1, 2, 3, "asd");
 	A b = a;
 	b.s = "";
 	cout << a.s;
 }
-
 void f2() {
 	//shadow/shallow cloning
 	//побитовое копирование
 	Vector *v1 = new Vector(2);
 	Vector *v2 = v1;
 }
-
 void f3() {
 	//deep cloning
 	Vector *v1 = new Vector(2);
 	Vector *v2 = new Vector(*v1);
 }
-
 void f4() {
 	Vector *v1 = new Vector(2);
 	v1->print();
 	delete v1;
 }
-
 void f5() {
 	//проверьте с explicit и без
 	/*String s1 = "csac";
 	String s2("csac");*/
 }
-
 class Integer {
 private:
 	int value;
@@ -142,7 +143,6 @@ public:
 		return stream;
 	}*/
 };
-
 Integer operator +(const Integer& left, const Integer& right) {
 	Integer x = Integer(left.value + right.value);
 	return x;
@@ -151,7 +151,6 @@ void test(Integer x) {
 	x.value = 5;
 	assert(x.getValue(), 5);
 }
-
 void f6() {
 	/*Integer x(5);
 	x = 10;
@@ -181,18 +180,23 @@ public:
 		return a1 + d * (n - 1);
 	}
 };
-
 void f7() {
 	Progression progression(5, 6);
 	for (int i = 0; i < 10; ++i) {
 		cout << "i: " << progression[i] << ", a(n): " << progression(i) << endl;
 	}
 }
-int main() {
-	Integer x(5), z(5);
+void f8() {
+	/*Integer x(5), z(5);
 	Integer j = x + z;
 	int y = x;
-	cout << y << endl;
+	cout << y << endl;*/
+}
+int main() {
+
+	String s("asdzxc");
+	cout << s[1] << endl;
+	s(1);
 	system("pause");
 	return 0;
 }
